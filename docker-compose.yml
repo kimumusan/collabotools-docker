@@ -1,32 +1,55 @@
 version: '3'
+
 services:
+
   redmine:
     image: redmine:3.3
     ports:
       - 8000:3000
     environment:
-      REDMINE_DB_MYSQL: mysql
-      REDMINE_DB_PASSWORD: example
+      REDMINE_DB_MYSQL: mysql_redmine
+      REDMINE_DB_PASSWORD: redmine
     volumes:
-      - filevolume:/usr/src/redmine/files
+      - redmine_filevolume:/usr/src/redmine/files
       - /etc/localtime:/etc/localtime:ro
     depends_on:
-      - mysql
+      - mysql_redmine
     restart: always
-  mysql:
-    image: mysql:5.6
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+
+  mysql_redmine:
+    build: ./mysql
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: redmine
       MYSQL_DATABASE: redmine
     volumes:
-      - datavolume:/var/lib/mysql
+      - redmine_dbvolume:/var/lib/mysql
       - /etc/localtime:/etc/localtime:ro
     restart: always
+
   gitbucket:
     build: ./gitbucket
+    ports:
+      - 8080:8080
+    environment:
+      GITBUCKET_DB_URL: jdbc:mysql://mysql_gitbucket/gitbucket?useUnicode=true&characterEncoding=utf8
+      GITBUCKET_DB_USER: gitbucket
+      GITBUCKET_DB_PASSWORD: gitbucket
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+
+  mysql_gitbucket:
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: gitbucket
+      MYSQL_DATABASE: gitbucket
+    volumes:
+      - gitbucket_dbvolume:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
 
 volumes:
-  datavolume:
-  filevolume:
-    
+  redmine_dbvolume: {}
+  redmine_filevolume: {}
+  gitbucket_dbvolume: {}
+
