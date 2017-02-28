@@ -9,6 +9,8 @@ services:
     environment:
       REDMINE_DB_MYSQL: mysql_redmine
       REDMINE_DB_PASSWORD: redmine
+      HTTP_PROXY: ${http_proxy}
+      HTTPS_PROXY: ${https_proxy}
     volumes:
       - redmine_filevolume:/usr/src/redmine/files
       - /etc/localtime:/etc/localtime:ro
