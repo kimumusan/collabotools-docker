@@ -69,6 +69,7 @@ services:
     volumes:
       - rocketchat_dbvolume:/data/db
       - /etc/localtime:/etc/localtime:ro
+    restart: always
 
 volumes:
   redmine_dbvolume: {}
