@@ -37,6 +37,7 @@ services:
       GITBUCKET_DB_USER: gitbucket
       GITBUCKET_DB_PASSWORD: gitbucket
     volumes:
+      - gitbucket_repovolume:/root/.gitbucket
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - mysql_gitbucket
@@ -75,4 +76,5 @@ volumes:
   redmine_dbvolume: {}
   redmine_filevolume: {}
   gitbucket_dbvolume: {}
+  gitbucket_repovolume: {}
   rocketchat_dbvolume: {}
