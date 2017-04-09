@@ -1,5 +1,7 @@
 #!/bin/sh
 
+docker-compose stop
+
 docker run --rm\
  -v collabotoolsdocker_redmine_filevolume:/target/redmine_file/ \
  -v collabotoolsdocker_redmine_dbvolume:/target/redmine_db/ \
@@ -10,3 +12,4 @@ docker run --rm\
  -i \
  ubuntu bash -c "cd /target && tar xvfz /backup/backup.tar.gz --strip 1"
 
+docker-compose start
