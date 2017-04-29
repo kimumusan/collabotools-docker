@@ -13,6 +13,7 @@ services:
       HTTPS_PROXY: ${https_proxy}
     volumes:
       - redmine_filevolume:/usr/src/redmine/files
+      - redmine_pluginvolume:/usr/src/redmine/plugins
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - mysql_redmine
@@ -74,6 +75,7 @@ services:
 
 volumes:
   redmine_dbvolume: {}
+  redmine_pluginvolume: {}
   redmine_filevolume: {}
   gitbucket_dbvolume: {}
   gitbucket_repovolume: {}
