@@ -11,6 +11,7 @@ services:
       REDMINE_DB_PASSWORD: redmine
       HTTP_PROXY: ${http_proxy}
       HTTPS_PROXY: ${https_proxy}
+      TZ: Asia/Tokyo
     volumes:
       - redmine_filevolume:/usr/src/redmine/files
       - redmine_pluginvolume:/usr/src/redmine/plugins
@@ -24,6 +25,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: redmine
       MYSQL_DATABASE: redmine
+      TZ: Asia/Tokyo
     volumes:
       - redmine_dbvolume:/var/lib/mysql
       - /etc/localtime:/etc/localtime:ro
@@ -38,6 +40,7 @@ services:
       GITBUCKET_DB_NAME:     gitbucket
       GITBUCKET_DB_USER:     gitbucket
       GITBUCKET_DB_PASSWORD: gitbucket
+      TZ: Asia/Tokyo
     volumes:
       - gitbucket_repovolume:/root/.gitbucket
       - /etc/localtime:/etc/localtime:ro
@@ -52,6 +55,7 @@ services:
       MYSQL_DATABASE:      gitbucket
       MYSQL_USER:          gitbucket
       MYSQL_PASSWORD:      gitbucket
+      TZ: Asia/Tokyo
     volumes:
       - gitbucket_dbvolume:/var/lib/mysql
       - /etc/localtime:/etc/localtime:ro
@@ -63,6 +67,7 @@ services:
       - 50003:3000
     environment:
       MONGO_URL: mongodb://mongodb_rocketchat:27017/mydb
+      TZ: Asia/Tokyo
     volumes:
       - /etc/localtime:/etc/localtime:ro
     depends_on:
@@ -71,6 +76,8 @@ services:
 
   mongodb_rocketchat:
     image: mongo:3.4
+    environment:
+      TZ: Asia/Tokyo
     volumes:
       - rocketchat_dbvolume:/data/db
       - /etc/localtime:/etc/localtime:ro
