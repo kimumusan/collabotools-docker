@@ -11,6 +11,6 @@ docker run --rm\
  -v collabotoolsdocker_gitbucket_dbvolume:/target/gitbucket_db/ \
  -v /$(pwd):/backup/ \
  -i \
- ubuntu bash -c "cd /target && tar xvfz /backup/backup.tar.gz --strip 1" 1> restore.log 2> restore_error.log
+ ubuntu bash -c "cd /target && tar xvfz /backup/backup.tar.gz --strip 1" 1> logs/restore.log 2> logs/restore_error.log
 
 docker-compose start

@@ -11,6 +11,6 @@ docker run --rm \
  -v collabotoolsdocker_gitbucket_dbvolume:/target/gitbucket_db/ \
  -v /$(pwd):/backup/ \
  -i \
- ubuntu tar cvfz //backup/backup.tar.gz //target 1> backup.log 2> backup_error.log
+ ubuntu tar cvfz //backup/backup.tar.gz //target 1> logs/backup.log 2> logs/backup_error.log
 
 docker-compose start
