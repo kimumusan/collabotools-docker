@@ -40,9 +40,10 @@ services:
       GITBUCKET_DB_NAME:     gitbucket
       GITBUCKET_DB_USER:     gitbucket
       GITBUCKET_DB_PASSWORD: gitbucket
+      JAVA_OPS:              -server
       TZ: Asia/Tokyo
     volumes:
-      - gitbucket_repovolume:/root/.gitbucket
+      - gitbucket_repovolume:/gitbucket
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - mysql_gitbucket
